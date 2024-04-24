@@ -33,12 +33,6 @@ For Windows:
 2. TeXstudio無法編譯北科大碩博士論文時的設定，TeXstudio只當編輯器使用
    請執行資料夾中的make.bat進行編譯，可用文字編輯器修改make.bat中的命令(注意引號別刪)
 
-xelatex.exe -synctex=1 -interaction=nonstopmode "論文主檔名".tex
-bibtex.exe 論文主檔名
-xelatex.exe -synctex=1 -interaction=nonstopmode "論文主檔名".tex
-xelatex.exe -synctex=1 -interaction=nonstopmode "論文主檔名".tex
-pause
-
 3. TeXstudio編譯北科大碩博士論文時的設定 Options -> Configure TeXstudio -> Build 
  - Build & View = "Build & View"
  - Default Compiler = XeLaTex
@@ -53,7 +47,7 @@ For Overleaf:
 - Main_Dissertation.tex = 論文章節結構主檔
 - FrontCover.tex = 封面
 - InnerCover.tex = 內書頁
-- Sign.pdf = 口試審定書PDF檔 //定稿時才插入 // 初稿時請先註解223~226行
+- Sign.pdf = 口試審定書PDF檔 //定稿時才插入 // 初稿時請先註解229~232行
 - Acknowledgment.tex = 致謝
 - Abstract_chinese.tex = 中文摘要 
 - Abstract_en.tex = 英文摘要 
