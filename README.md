@@ -79,3 +79,6 @@ For Overleaf:
 
 ## Latex參考資源
 1. http://timshan.wikidot.com/latex-resources
+
+## 一些廢話
+2017年畢業時自己刻了這個template，想不到都已經2024年了，還有學弟妹們在網路上求Template，因此放上來造福學弟妹們。
