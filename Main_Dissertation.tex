@@ -1,0 +1,440 @@
+%
+% Bibliography, index, etc., in TOC
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tocbibind
+%
+% Appendixes
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=appendix
+%
+% Watermark
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=watermark
+%
+% 頁碼的編排
+% http://www.econ.ntu.edu.tw:8080/tmwu/viewtopic.php?t=433&highlight=%A5%D8%BF%FD+%BDs%BDX
+%
+% 使用chapter的方法
+% \titleformat{\chapter}[display]{\vspace*{-5mm} \centering \bfseries \fontsize{20pt}{18pt} \selectfont}{Chapter \thechapter}{0.2cm}{}
+% \chapter{Introduction}
+%
+% 使用section的方法
+% \titleformat{\section}[hang]{\fontsize{18pt}{0pt} \selectfont \bf}{\thesection}{0.2cm}{}
+% \section{Broadcast for Index Trees}
+%
+% 使用subsection的方法
+% \titleformat{\subsection}[hang]{\fontsize{16pt}{0pt} \selectfont \bf}{\thesubsection}{0.2cm}{}
+% \subsection{subsection}
+%
+% 使用subsubsection的方法
+% \titleformat{\subsubsection}[hang]{\fontsize{14pt}{0pt} \selectfont \bf}{\thesubsubsection}{0.2cm}{}
+% \subsubsection{subsubsection}
+%
+
+% 字型大小12點, A4的紙張, 內文格式採用report
+\documentclass[12pt,a4paper]{report}
+%\documentclass[12pt,a4paper]{article}
+%
+
+% 引用套件
+%　使用中文套件xeCJK時，無法使用字型套件times
+%\usepackage{times}
+%　中文套件
+\usepackage{xeCJK}
+%　設定中文為系統上的字型，而英文不去更動，使用原TeX字型
+% for windows
+%\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant]{標楷體}
+% for overleaf
+\setCJKmainfont[AutoFakeBold=4,AutoFakeSlant]{TW-Kai}
+%　這兩行一定要加，中文才能自動換行 
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+%　設定非中文字型
+\setmainfont{Times New Roman}
+
+%\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+%bm是可以讓數學符號變粗體 使用方式 \bm{符號}
+%\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage[algo2e,linesnumbered,boxruled]{algorithm2e}
+\usepackage{pdfpages}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+%　圖的編號格式設定(英文版)
+\usepackage[labelsep=period]{caption}
+%　圖的編號格式設定(中文版)
+%\usepackage[labelsep=quad]{caption}
+%\renewcommand{\figurename}{圖}
+%\renewcommand{\tablename}{表}
+
+
+%　版面與邊界設定
+\usepackage[nohead,top=2.5cm,left=2.5cm,right=2.5cm,bottom=2.75cm,footskip=1cm]{geometry}
+
+%只在twoside(雙面列印)時有作用
+%讓章節結束在偶數頁，若為奇數頁則自動補空白頁
+\newcommand{\chapterfinished}{\clearpage
+	\ifodd\count0 \else \thispagestyle{empty}\mbox{}\clearpage \fi}
+
+%　紙張背景(學校LOGO浮水印)
+\usepackage{background}
+%取消浮水印
+\newcommand\DeactivateBG{
+	\backgroundsetup{contents={}}
+}
+%開始浮水印
+\newcommand\ActivateBG{
+	\backgroundsetup{scale=1, angle=0, opacity=0.13, color =black, contents={\includegraphics[scale=1]{background.png}}}
+}
+
+%在封面、書名頁後插入無浮水印之空白頁(雙面列印才需使用)
+\newcommand\newblankpage{\clearpage\DeactivateBG\thispagestyle{empty}\mbox{}\clearpage\ActivateBG
+}
+
+% tocloft 建立目錄之套件
+\usepackage[subfigure]{tocloft} 
+%\usepackage{titletoc} %此套件雖新，但無法自定義目錄清單項目開頭標籤，如Table 1.X或Figure 2.X
+% titlesec 自訂章節樣式之套件
+\usepackage{titlesec}
+
+%中文段落縮排
+%\usepackage{indentfirst} \setlength{\parindent}{24pt}
+
+%數學公式 編號格式 : 章節數.編號
+\numberwithin{equation}{chapter}
+
+
+% 將section編號設定為三層
+\setcounter{secnumdepth}{3}
+%
+
+% 設定目錄顯示三層section
+\setcounter{tocdepth}{3}
+%
+
+% 將Content (Tables, Figures)改成Table of Contents(List of Tables, List of Figures)
+%\renewcommand{\contentsname}{\protect \centering TABLE OF CONTENTS}
+%\renewcommand{\listtablename}{\protect \centering LIST OF TABLES}
+%\renewcommand{\listfigurename}{\protect \centering LIST OF FIGURES}
+\renewcommand*\cfttoctitlefont{ \vspace{-30pt}\hfil\bfseries\fontsize{20pt}{18pt} \selectfont}
+\renewcommand*\cftloftitlefont{ \vspace{-30pt}\hfil\bfseries\fontsize{20pt}{18pt} \selectfont}
+\renewcommand*\cftlottitlefont{ \vspace{-30pt}\hfil\bfseries\fontsize{20pt}{18pt} \selectfont}
+\renewcommand*\contentsname{TABLE OF CONTENTS}
+\renewcommand*\listfigurename{LIST OF FIGURES}
+\renewcommand*\listtablename{LIST OF TABLES}
+% 將Bibliography改為BIBLIOGRAPHY
+\renewcommand*\bibname{BIBLIOGRAPHY}
+
+% 使用tocloft套件取消套件自建各種目錄的標題
+\makeatletter
+\renewcommand{\@cftmaketoctitle}{}
+\renewcommand{\@cftmakelottitle}{}
+\renewcommand{\@cftmakeloftitle}{}
+\makeatother
+
+%自訂目錄清單項目開頭標籤與標籤大小
+\renewcommand{\cfttabpresnum}{Table } % Adds the word &quot;Figure&quot; in front of the number.
+\renewcommand{\cfttabnumwidth}{5em} % Adds some white space.
+\renewcommand{\cftfigpresnum}{Figure } % Adds the word &quot;Figure&quot; in front of the number.
+\renewcommand{\cftfignumwidth}{5em} % Adds some white space.
+
+
+%　自訂英文chapter命令，並定義在目錄中顯示Chapter的格式
+%　使用方式 \echapter{章節數}{名稱} ex:\echapter{1}{introduction}
+\newcommand{\echapter}[2]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\setcounter{table}{0}
+	\setcounter{figure}{0}
+	\setcounter{equation}{0}
+	\chapter*{Chapter #1\\\MakeUppercase{#2}}
+	\vspace{-1em}
+	\addcontentsline{toc}{chapter}{Chapter #1\quad\MakeUppercase{#2}}
+}
+%　自訂中文chapter命令，並定義在目錄中顯示Chapter的格式
+%　使用方式 \cchapter{章節數(數字)}{章節數(中文)}{名稱} ex:\cchapter{1}{一}{背景}
+\newcommand{\cchapter}[3]{
+	\setcounter{chapter}{#1}
+	\setcounter{section}{0}
+	\setcounter{table}{0}
+	\setcounter{figure}{0}
+	\setcounter{equation}{0}
+	\chapter*{第#2章\quad #3}
+	\vspace{-1em}
+	\addcontentsline{toc}{chapter}{第#2章\quad #3}
+}
+
+%
+% 行距調成1.5倍行高
+\linespread{1.5}
+% 行距調成1.9倍行高 = Word的1.5倍行高
+%\linespread{1.9}
+%
+
+% 定義的指令
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defi}{Definition}
+\newtheorem{prop}{Property}
+%
+%更換證明結束符號為黑色方塊
+\renewcommand\qedsymbol{$\blacksquare$}
+
+% 演算法設定
+\SetAlCapSkip{1em}
+\SetAlCapHSkip{1em}
+
+%hyperref套件是讓所有交互參照和目錄加上連結，此套件需最後載入否則一堆奇怪問題
+%目前會無法辨認自訂的章節命令，如本檔中自訂的\echapter和\cchapter
+%因此Log會出現Error訊息，但能成功編譯(不包含bibtex)
+%請先註解掉這段，編譯過3次並有正常cite編號後再使用
+%hidelinks=隱藏連結框+字不變色
+%pdfauthor={作者姓名}
+%pdftitle={論文名稱}
+%pdfkeywords={關鍵字清單}
+\usepackage[breaklinks=true]{hyperref}
+\hypersetup{hidelinks,
+pdfstartview=Fit, pdfauthor={姓名}, pdftitle={論文名稱}, pdfkeywords={keyword1, keyword2, keyword3, keyword4, and keyword5}
+}
+
+
+\begin{document}
+%　取消使用浮水印
+\DeactivateBG
+%　外封面
+\input{FrontCover}
+%　外封面無頁碼
+\thispagestyle{empty}
+%　結束外封面
+%　新增無頁碼和浮水印空白頁(雙面列印用)
+\newblankpage
+
+%使用浮水印
+\ActivateBG
+%　內封面(書名頁)
+\input{InnerCover}
+%　內封面無頁碼
+\thispagestyle{empty}
+%　結束內封面
+%　新增無頁碼和浮水印空白頁(雙面列印用)
+\newblankpage
+
+
+%　取消使用浮水印
+\DeactivateBG
+%插入審定書PDF檔，等名預設為Sign
+\includepdf[pages={1}]{Sign}
+\newblankpage
+
+% 從這裡開始頁碼用羅馬數字(重新編號)
+\pagenumbering{roman}
+%
+
+%　摘要、目錄、表目錄、圖目錄的標題設定
+\titleformat{\chapter}[hang]{\protect \vspace{-36pt} \centering \bfseries \fontsize{20pt}{18pt} \selectfont}{}{}{}
+
+
+\begin{spacing}{1.5}
+% 中文摘要標題
+\chapter*{摘　要}
+% 將中文摘要標題加入目錄
+\addcontentsline{toc}{chapter}{摘要}
+%　引入摘要內容
+\input{Abstract_chinese}
+%　結束摘要
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+% 英文摘要標題
+\chapter*{ABSTRACT}
+% 將英文摘要標題加入目錄
+\addcontentsline{toc}{chapter}{ABSTRACT}
+%　引入摘要內容
+\input{Abstract_en}
+%　結束摘要
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+% 英文誌謝標題
+\chapter*{ACKNOWLEDGMENT}
+% 將誌謝標題加入目錄
+\addcontentsline{toc}{chapter}{ACKNOWLEDGMENT}
+%　引入誌謝內容
+\input{Acknowledgment}
+%　結束誌謝
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+% 目錄
+\chapter*{TABLE OF CONTENTS}
+\addcontentsline{toc}{chapter}{TABLE OF CONTENTS}
+\tableofcontents
+%　結束目錄
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+% 表目錄
+\chapter*{LIST OF TABLES}
+\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\listoftables
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+%　圖目錄
+\chapter*{LIST OF FIGURES}
+\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\listoffigures
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+\end{spacing}
+
+% 從這裡開始頁碼用阿拉伯數字(重新編號)
+\pagenumbering{arabic}
+
+
+
+
+%　正文Chapter標題格式設定
+\titleformat{\chapter}[display]{\protect \vspace*{-49pt} \centering \bfseries \fontsize{20pt}{30pt} \selectfont}{Chapter \thechapter}{0.2cm}{}
+%　正文Section標題格式設定
+\titleformat{\section}[hang]{\fontsize{18pt}{27pt} \selectfont \bf}{\thesection}{0.2cm}{}
+%　正文subsection標題格式設定
+\titleformat{\subsection}[hang]{\fontsize{16pt}{24pt} \selectfont \bf}{\thesubsection}{0.2cm}{}
+%　正文subsubsection標題格式設定
+\titleformat{\subsubsection}[hang]{\fontsize{14pt}{21pt} \selectfont \bf}{\thesubsubsection}{0.2cm}{}
+
+
+
+
+
+%　正文開始依章節順序導入
+% 章: Introduction
+\cchapter{1}{一}{背景} \label{ch:1}  %中文標題請用\cchapter
+%\echapter{1}{Introduction} \label{ch:1}
+\input{1-Introduction}
+
+\section{Challenges 第一階層子標題}
+\input{1.1-Challenges}
+
+\section{Motivation}
+\input{1.2-Motivation}
+
+\section{Research Objectives}
+\input{1.3-Objectives}
+
+\section{Dissertation Outline}
+\input{1.4-Outline}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+% 章: State of the Art and Contributions
+\echapter{2}{State of the art and contributions} \label{ch:2}
+\input{2-StateOfArt}
+
+\section{Techniques for XXX}
+\input{2.1-Tech1} 
+\label{ch:query-processing}
+
+\section{Techniques for XXX2}
+\input{2.2-Tech2}
+
+\section{Research Contributions}
+\input{2.3-Contributions}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+% 章: Query Processing on Mobile Wireless Sensor Networks
+\echapter{3}{System Model and Problem Formulation} \label{ch:3}
+\input{3-QueryProcessingOnWSNs}
+
+\section{System Model}
+\input{3.1-SystemModel}
+
+\section{Problem Formulation}
+\input{3.2-ProblemFormulation}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+% 章: The Proposed Method
+\echapter{4}{The Proposed Method} \label{ch:4}
+
+\section{Proposed Method}
+\input{4.1-Method}
+
+\section{Complexity Analysis}
+\input{4.2-Complexity}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+% 章: The Proposed Method
+\echapter{5}{Simulation Results} \label{ch:5}
+
+\section{Simulation Settings}
+\input{5.1-Simulations}
+
+\section{Discussion}
+\input{5.2-Discussion}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+
+% 章: Research Plan
+\echapter{6}{Conclusion and Future Directions} \label{ch:conclusion}
+\input{6-Conclusion}
+%　單面印刷用\clearpage，雙面印刷用\chapterfinished
+%\clearpage
+\chapterfinished
+
+
+{
+\setstretch{1.2}
+% 參考文獻格式設定
+%\bibliographystyle{plain}
+\bibliographystyle{abbrv}
+% 參考文獻標題格式設定
+\titleformat{\chapter}[hang]{\protect \vspace{-30pt} \centering \bfseries \fontsize{20pt}{18pt} \selectfont}{}{}{}
+%\titlecontents{chapter}[6mm]{\vspace{18pt}}{\bfseries \contentslabel{6mm}}{\hspace*{-7mm} \bfseries \contentslabel{8mm}}{\titlerule*[10pt]{} \bfseries \contentspage}
+
+%\chapter*{BIBLIOGRAPHY}
+% 將參考文獻加入目錄
+%\addcontentsline{toc}{chapter}{BIBLIOGRAPHY}
+%引入文獻檔，使用方式為 \bibliography{檔名}
+\bibliography{reference}
+}
+\chapterfinished
+
+% 將符號表的標題格式設定成跟目錄相同
+\titleformat{\chapter}[hang]{\protect \vspace{-36pt} \centering \bfseries \fontsize{20pt}{18pt} \selectfont}{}{}{}
+% 符號說明清單
+\chapter*{LIST OF SYMBOLS}
+\label{symbols}
+% 將符號說明清單加入目錄
+\addcontentsline{toc}{chapter}{LIST OF SYMBOLS}
+%　引入符號說明清單內容
+\input{Symbols}
+%　結束符號說明清單
+
+\end{document}

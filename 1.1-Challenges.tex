@@ -1,0 +1,7 @@
+Before we present the detailed proposed approaches for processing C$k$NN and CRSQ queries, in this section we give the overviews of considered emerging mobile environments.
+
+\subsection{Mobile Wireless Sensor Networks}
+The Mobile Wireless Sensor Network (MWSN) is an emerging technology with significant applications. A MWSN can simply YYYYYYYYYYYYYYYYYYYYYYY.
+
+\subsection{Mobile Peer-to-Peer Networks}
+但在廣播環境中進行道路網路的適地性查詢也有難處，伺服端無法事先知道查詢點的位置以及客戶端在下了查詢後亦無法隨意取得自己需要的區塊資料。因此，需要先預先處理需要的資料，將這些資料放進在廣播資料裡，輔助客戶端能篩選出自己需要的區塊，但這些資料也不能佔據太多的廣播空間，不然客戶端會需要很長的時間才能計算出答案，這些預先處理的資料我們稱為索引結構。本篇論文主要探討在廣播環境中的反向最近鄰居搜尋，以下是本論文提出的方法。在廣播伺服端方面，伺服端會先將道路網路利用網格切割法分割成數個區塊，接著預先計算所有邊界點對於相鄰區塊裡的最近景點距離以及每個區塊內部的最大距離後加入索引結構；在客戶端方面，客戶端以相應的方式接收索引，並利用索引內的資料計算出整個查詢的距離上限(Upper Bound)，與每個區塊與查詢點各自的距離下限(Upper Bound)，利用這些距離上限與下限，可以篩選出客戶端可能需要的區塊，當客戶端接收完所有可能區塊後，便可算出查詢的答案。

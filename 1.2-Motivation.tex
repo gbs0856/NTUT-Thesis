@@ -1,0 +1,12 @@
+In this section, we present some concepts and definitions that are generally used about the spatial data queries on moving data objects. 
+
+\subsection{\textit{k} Nearest Neighbors Search}
+The nearest neighbors (NN) search is a fundamental problem in computer science that is crucial for applications such as geographic information systems (GIS) and pattern recognition. With the increasing popularity of information services related to NN search, there has been significant research on this topic, resulting in many variations of NN search queries, such as group nearest neighbors (GNN), $k$ nearest neighbors, range nearest neighbors, line nearest neighbors, and reverse nearest neighbors. Of these, the $k$ nearest neighbors ($k$NN) search is the most widely used. A mobile client might query "where is the nearest gas station?" or "please provide the five closest bookstores." Generally, the goal of a $k$NN search at a query node $q$ is to identify the $k$ closest objects to $q$ within a given data set $D$. The function $dist(a, b)$ denotes the distance between two objects, $a$ and $b$. In Euclidean space, the distance is defined as Definition~\ref{d1}.
+%
+\begin{defi}
+	\label{d1}(Euclidean distance)\\
+	Given two data objects (or points) $a$ and $b$ in a plane, we denote the distance between two objects $a=(a_x,a_y)$ and $b=(b_x,b_y)$ as
+	$dist(a,b)=\sqrt{(a_x-b_y)^2+(a_y-b_y)^2}$.
+\end{defi}
+
+\clearpage
