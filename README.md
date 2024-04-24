@@ -1,5 +1,5 @@
 # NTUT-Thesis
-國立臺北科技大學碩博士論文XeLaTeX模板
+國立臺北科技大學碩博士論文XeLaTeX模板 (中英文皆支援)
 
 ## 軟體安裝(for windows)
 依序安裝以下軟體(64bit):
